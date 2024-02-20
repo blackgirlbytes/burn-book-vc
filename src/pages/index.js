@@ -225,6 +225,8 @@ export default function Home() {
         data: credentialData
       });
 
+      console.log(vc)
+
       const signedVcJwt = await vc.sign({ did: credentialIssuerDid });
 
       console.log("Credential issued:", vc);

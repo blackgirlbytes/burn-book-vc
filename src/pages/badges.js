@@ -13,6 +13,7 @@ export default function Badges() {
             padding: '20px',
             maxWidth: '600px',
             margin: '0 auto',
+            display: 'flex',
         },
         header: {
             textAlign: 'center',
@@ -92,14 +93,14 @@ export default function Badges() {
     const { web5Instance, myDid } = useWeb5();
     const [credentials, setCredentials] = useState([]);
 
-    // useEffect(() => {
-    //     const getVcs = async () => {
-    //         if (web5Instance && myDid) {
-    //             await fetchStoredCredentials(myDid);
-    //         }
-    //     }
-    //     getVcs();
-    // }, []);
+    useEffect(() => {
+        const getVcs = async () => {
+            if (web5Instance && myDid) {
+                await fetchStoredCredentials(myDid);
+            }
+        }
+        getVcs();
+    }, []);
 
     const fetchStoredCredentials = async (myDid) => {
         try {
@@ -191,7 +192,7 @@ export default function Badges() {
                             <p style={styles.credentialLabel}>Type:</p>
                             <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.type}</p>
                             <p style={styles.credentialLabel}>Issue Date:</p>
-                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.issueDate}</p>
+                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.issuanceDate}</p>
                             <p style={styles.credentialLabel}>Achievement:</p>
                             <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.credentialSubject.achievement}</p>
                             <p style={styles.credentialLabel}>Workshop:</p>

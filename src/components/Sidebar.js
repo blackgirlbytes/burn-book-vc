@@ -17,6 +17,11 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                             Badges
                         </Link>
                     </li>
+                    <li>
+                        <Link href="/completed">
+                            Completed
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </div>
