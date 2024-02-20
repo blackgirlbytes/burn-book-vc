@@ -190,7 +190,7 @@ export default function Badges() {
                         <div id={`print${index}`} style={styles.credentialCardStyles}>
                             <div style={styles.watermark}>@BLACKGIRLBYTES</div>
                             <p style={styles.credentialLabel}>Type:</p>
-                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.type}</p>
+                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.type[1]}</p>
                             <p style={styles.credentialLabel}>Issue Date:</p>
                             <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.issuanceDate}</p>
                             <p style={styles.credentialLabel}>Achievement:</p>
