@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useWeb5 } from "./Web5Context";
+import { useWeb5 } from "../Web5Context";
 import { VerifiableCredential } from "@web5/credentials";
 import html2canvas from 'html2canvas';
 import axios from 'axios';

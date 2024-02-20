@@ -1,6 +1,6 @@
 
 import styles from '../styles/Home.module.css';
-import { Web5Provider } from './Web5Context';
+import { Web5Provider } from '../Web5Context';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 

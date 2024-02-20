@@ -1,7 +1,7 @@
 // In badges.js
 import { useEffect, useState, useCallback } from 'react';
 import { VerifiableCredential } from "@web5/credentials";
-import { useWeb5 } from "./Web5Context";
+import { useWeb5 } from "../Web5Context";
 import html2canvas from 'html2canvas';
 import axios from 'axios';
 

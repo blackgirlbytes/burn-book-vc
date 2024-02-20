@@ -1,5 +1,5 @@
 // import { Web5 } from "@web5/api";
-import { useWeb5 } from "./Web5Context";
+import { useWeb5 } from "../Web5Context";
 import { VerifiableCredential } from "@web5/credentials";
 import { DidDht } from "@web5/dids";
 import { useState, useEffect } from "react";
