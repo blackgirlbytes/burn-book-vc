@@ -23,6 +23,8 @@ const Completed = () => {
         header: {
             textAlign: 'center',
             color: '#333',
+            fontSize: '24px',
+            marginBottom: '20px',
         },
         button: {
             padding: '10px 15px',
@@ -59,6 +61,11 @@ const Completed = () => {
             cursor: 'pointer',
             marginRight: '10px',
         },
+        buttonContainer: {
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '20px',
+        },
         pre: {
             whiteSpace: 'pre-wrap',
             wordWrap: 'break-word',
@@ -67,24 +74,42 @@ const Completed = () => {
             cursor: 'pointer',
         },
         credentialCardStyles: {
-            border: '1px solid #ff69b4',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.05)',
             padding: '20px',
             margin: '20px auto',
-            borderRadius: '10px',
+            borderRadius: '8px',
             backgroundColor: '#fff',
             color: '#333',
             textAlign: 'left',
             maxWidth: '420px',
-            fontFamily: 'Segoe UI, sans-serif',
+            fontFamily: '"Segoe UI", sans-serif',
             position: 'relative',
             overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+        },
+        credentialHeader: {
+            background: 'linear-gradient(135deg, #654ea3, #eaafc8)',
+            color: 'white',
+            padding: '20px',
+            fontWeight: 'bold',
+            fontSize: '1.2em',
+            height: '50px', // Adjust the height as needed
+            // position: 'relative',
+            borderRadius: '10px 10px 0 0'
+        },
+        credentialBody: {
+            padding: '20px',
+            backgroundColor: '#f7f7f7',
+            borderBottomLeftRadius: '7px',
+            borderBottomRightRadius: '7px',
+            borderTop: '1px solid rgba(0, 0, 0, 0.1)',
         },
         credentialDetail: {
-            color: '#ff69b4',
+            color: '#333',
             margin: '10px 0',
             fontSize: '16px',
-            color: '#ff69b4'
         },
         credentialLabel: {
             fontSize: '16px',
@@ -93,14 +118,9 @@ const Completed = () => {
             color: '#555',
             fontWeight: 'bold',
         },
-        watermark: {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            opacity: '0.1',
-            fontSize: '3em',
-            color: '#ff69b4',
+        email: {
+            textAlign: 'center',
+            marginTop: '20px',
         }
     };
 
@@ -176,28 +196,33 @@ const Completed = () => {
 
     return (
         <div>
-            <h1>Congratulations, you completed the workshop!</h1>
-            <button style={styles.button}  onClick={redeemCredential}>Redeem Credential</button>
+            <h1 style={styles.header}>Congratulations, you completed the workshop!</h1>
+            <div style={styles.buttonContainer}>
+                <button style={styles.button} onClick={redeemCredential}>Redeem Credential</button>
+            </div>
+
             {credential && (
                 <>
                     <div>
                         <div id={`share`} style={styles.credentialCardStyles}>
-                            <div style={styles.watermark}>@BLACKGIRLBYTES</div>
-                            <p style={styles.credentialLabel}>Type:</p>
-                            <p style={styles.credentialDetail}>{credential.type}</p>
-                            <p style={styles.credentialLabel}>Issue Date:</p>
-                            <p style={styles.credentialDetail}>{credential.issueDate}</p>
-                            <p style={styles.credentialLabel}>Achievement:</p>
-                            <p style={styles.credentialDetail}>{credential.achievement}</p>
-                            <p style={styles.credentialLabel}>Workshop:</p>
-                            <p style={styles.credentialDetail}>{credential.workshop}</p>
-                            <p style={styles.credentialLabel}>Issued by:</p>
-                            <p style={styles.credentialDetail}>@blackgirlbytes</p>
+                            <div style={styles.credentialHeader}>Web5 Learner Credential</div>
+                            <div style={styles.credentialBody}>
+                                <p style={styles.credentialLabel}>Issue Date:</p>
+                                <p style={styles.credentialDetail}>{credential.issueDate}</p>
+                                <p style={styles.credentialLabel}>Achievement:</p>
+                                <p style={styles.credentialDetail}>{credential.achievement}</p>
+                                <p style={styles.credentialLabel}>Workshop:</p>
+                                <p style={styles.credentialDetail}>{credential.workshop}</p>
+                                <p style={styles.credentialLabel}>Issued by:</p>
+                                <p style={styles.credentialDetail}>@blackgirlbytes</p>
+                            </div>
                         </div>
                     </div>
-                    <button style={styles.button} onClick={handleDownloadImage}>Download Credential</button>
-                    <button style={styles.button} onClick={handleShareToTwitter}>Share to Twitter</button>
-                    <p>Send your credential to <a href={`mailto:${email}`}>{email}</a> in exchange for your prize!</p>
+                    <div style={styles.buttonContainer}>
+                        <button style={styles.button} onClick={handleDownloadImage}>Download Credential</button>
+                        <button style={styles.button} onClick={handleShareToTwitter}>Share to Twitter</button>
+                    </div>
+                    <p style={styles.email}>Send your credential to <a href={`mailto:${email}`}>{email}</a> in exchange for your prize!</p>
                 </>
             )}
         </div>

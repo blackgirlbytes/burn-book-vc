@@ -13,11 +13,13 @@ export default function Badges() {
             padding: '20px',
             maxWidth: '600px',
             margin: '0 auto',
-            display: 'flex',
+            flexDirection: 'column',
         },
         header: {
             textAlign: 'center',
             color: '#333',
+            fontSize: '24px',
+            marginBottom: '20px',
         },
         button: {
             padding: '10px 15px',
@@ -27,6 +29,11 @@ export default function Badges() {
             borderRadius: '4px',
             cursor: 'pointer',
             marginRight: '10px',
+        },
+        buttonContainer: {
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: '20px',
         },
         label: {
             display: 'block',
@@ -53,24 +60,42 @@ export default function Badges() {
             cursor: 'pointer',
         },
         credentialCardStyles: {
-            border: '1px solid #ff69b4',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.05)',
             padding: '20px',
             margin: '20px auto',
-            borderRadius: '10px',
+            borderRadius: '8px',
             backgroundColor: '#fff',
             color: '#333',
             textAlign: 'left',
             maxWidth: '420px',
-            fontFamily: 'Segoe UI, sans-serif',
+            fontFamily: '"Segoe UI", sans-serif',
             position: 'relative',
             overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+        },
+        credentialHeader: {
+            background: 'linear-gradient(135deg, #654ea3, #eaafc8)',
+            color: 'white',
+            padding: '20px',
+            fontWeight: 'bold',
+            fontSize: '1.2em',
+            height: '50px', // Adjust the height as needed
+            // position: 'relative',
+            borderRadius: '10px 10px 0 0'
+        },
+        credentialBody: {
+            padding: '20px',
+            backgroundColor: '#f7f7f7',
+            borderBottomLeftRadius: '7px',
+            borderBottomRightRadius: '7px',
+            borderTop: '1px solid rgba(0, 0, 0, 0.1)',
         },
         credentialDetail: {
-            color: '#ff69b4',
+            color: '#333',
             margin: '10px 0',
             fontSize: '16px',
-            color: '#ff69b4'
         },
         credentialLabel: {
             fontSize: '16px',
@@ -78,15 +103,6 @@ export default function Badges() {
             textTransform: 'uppercase',
             color: '#555',
             fontWeight: 'bold',
-        },
-        watermark: {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            opacity: '0.1',
-            fontSize: '3em',
-            color: '#ff69b4',
         }
     };
 
@@ -182,27 +198,34 @@ export default function Badges() {
 
     return (
         <div>
-            <h1>Your Badges</h1>
-            <button style={styles.button} onClick={()=>fetchStoredCredentials(myDid)}>Get Credentials</button>
+            <h1 style={styles.header}>Your Badges</h1>
+            <div style={styles.buttonContainer}>
+                <button style={styles.button} onClick={() => fetchStoredCredentials(myDid)}>Get Credentials</button>
+            </div>
             {credentials.map((credential, index) => (
                 <div key={index}>
                     {credential.parsedVc && (
+                        <div>
                         <div id={`print${index}`} style={styles.credentialCardStyles}>
-                            <div style={styles.watermark}>@BLACKGIRLBYTES</div>
-                            <p style={styles.credentialLabel}>Type:</p>
-                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.type[1]}</p>
-                            <p style={styles.credentialLabel}>Issue Date:</p>
-                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.issuanceDate}</p>
-                            <p style={styles.credentialLabel}>Achievement:</p>
-                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.credentialSubject.achievement}</p>
-                            <p style={styles.credentialLabel}>Workshop:</p>
-                            <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.credentialSubject.workshop}</p>
-                            <p style={styles.credentialLabel}>Issued by:</p>
-                            <p style={styles.credentialDetail}>@blackgirlbytes</p>
+                            <div style={styles.credentialHeader}>{credential.parsedVc.vcDataModel.type[1]}</div>
+                                <div style={styles.credentialBody}>
+                                    <p style={styles.credentialLabel}>Issue Date:</p>
+                                    <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.issuanceDate}</p>
+                                    <p style={styles.credentialLabel}>Achievement:</p>
+                                    <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.credentialSubject.achievement}</p>
+                                    <p style={styles.credentialLabel}>Workshop:</p>
+                                    <p style={styles.credentialDetail}>{credential.parsedVc.vcDataModel.credentialSubject.workshop}</p>
+                                    <p style={styles.credentialLabel}>Issued by:</p>
+                                    <p style={styles.credentialDetail}>@blackgirlbytes</p>
+                                </div>
+                            </div>
+                            <div style={styles.buttonContainer}>
+                                <button style={styles.button} onClick={() => handleDownloadImage(`print${index}`)}>Download Credential</button>
+                                <button style={styles.button} onClick={() => handleShareToTwitter(`print${index}`)}>Share to Twitter</button>
+                            </div>
                         </div>
                     )}
-                    <button style={styles.button} onClick={()=> handleDownloadImage(`print${index}`)}>Download Credential</button>
-                    <button style={styles.button} onClick={()=> handleShareToTwitter(`print${index}`)}>Share to Twitter</button>
+ 
                     {isUploading && <p>Loading...</p>}
                 </div>
             ))}
